@@ -2,11 +2,11 @@
 layout: post
 title: Cefas Data Hub APIs
 #subtitle: Excerpt from Soulshaping by Jeff Brown
-bigimg: /img/path.jpg
+#bigimg: /img/path.jpg
 tags: [data, data.cefas.co.uk, API, r]
 ---
 
-This post is about accessing data from the Cefas Data Hub. I'm by no means an expert in APIs, but I've figured out a fairly rudimentary ways to get data off it, which might help some people inside or outside of Cefas. Feel free to use and adapt this as you wish.
+This post is about accessing data from the Cefas Data Hub. I'm by no means an expert in APIs, but I've been using this code for years without issue. Feel free to use and adapt this as you wish.
 
 ### Terminology
 
@@ -18,11 +18,13 @@ This [example holding](http://data.cefas.co.uk/#/View/20141) has 2 datasets asso
 
 So, how do we fetch and use this data in R? Well, if you only want to do it once, then you can use the blue "download as csv" button on the data hub. If you want to do this dynamically, then read on.
 
-I preface this by saying that I'm not particularly familiar with any of the packages here, and it's likely there are better ways of doing all this, but I've been using it for years without issue. 
+You'll need the :httr: and :jsonlite: packages installed, first. 
 
-First, you need to find out the recordset ID. Here's a function I wrote which returns the IDs of all the recordsets associated with one holding. If you only need to use it once then you can use [my lookup tool](http://linlamp:3838/nm02/MDRLookup/) (currently only works within Cefas networks - sorry).
+First, you need to find out the recordset ID. Here's a function I wrote which returns the IDs of all the recordsets associated with one holding. If you only need to use it once then you can use [my lookup tool](http://linlamp:3838/nm02/MDRLookup/) (currently only works within Cefas networks - sorry). It also lets you lookup the holding ID from the recordset ID. I've only ever really done this to check my answers, but it's there if you need it. 
 
 ```r
+library(httr)
+library(jsonlite)
 getRecordSetID = function(HOLDINGId){
   url<- "https://cefasapp.cefas.co.uk/api/Recordsets"
   r=GET(url)
