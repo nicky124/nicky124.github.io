@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About me
+title: About
 #subtitle: 
 ---
 
-My name is Nicky, and this is the page where I'll show off my apps that I've worked on. Unless otherwise specified, they've been developed for Cefas, and IP is held by Cefas or our customers. 
+This website is designed as a home to apps that I've worked on, as well as a place to share (hopefully) useful code.
